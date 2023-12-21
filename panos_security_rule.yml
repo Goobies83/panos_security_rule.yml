@@ -1,11 +1,11 @@
 ---
-- name: Create Layer 4 Security Rule on Palo Alto Networks
-  hosts: localhost
+- name: Create Palo Alto Security Rule
+  hosts: palo_alto_device
   gather_facts: false
   tasks:
-    - name: Create Layer 4 Security Rule
+    - name: Create Security Rule
       panos_security_rule:
-        provider: "{{ provider }}"
+        provider: "{{ palo_alto_provider }}"
         rule_name: "Allow_TCP_Port_80"
         description: "Allow incoming TCP traffic on port 80"
         source_zone: "external"
