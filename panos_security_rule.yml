@@ -1,0 +1,23 @@
+---
+- name: Create Layer 4 Security Rule on Palo Alto Networks
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Create Layer 4 Security Rule
+      panos_security_rule:
+        provider: "{{ provider }}"
+        rule_name: "Allow_TCP_Port_80"
+        description: "Allow incoming TCP traffic on port 80"
+        source_zone: "external"
+        destination_zone: "internal"
+        source_ip: "any"
+        destination_ip: "any"
+        source_user: "any"
+        category: "any"
+        application: "service-http"
+        action: "allow"
+        log_start: true
+        log_end: true
+        log_profile: "default"
+        disabled: false
+      delegate_to: localhost
