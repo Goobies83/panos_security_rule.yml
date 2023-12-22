@@ -1,7 +1,7 @@
 - name: Configure Palo Alto Networks Interfaces
   hosts: palo_alto_devices
-  gather_facts: no
-  connection: local
+  gather_facts: yes
+  #connection: local
 
   tasks:
     - name: Configure Ethernet1/1 interface
