@@ -18,9 +18,9 @@
         ip_address: "192.168.1.1/24"
 
   tasks:
-    - name: Commit changes
-      panos_commit:
-        provider: "{{ provider }}"
-      delegate_to: localhost     
+  - name: Commit changes
+    panos_commit_all:
+      provider: "{{ provider }}"
+    delegate_to: localhost     
 
     # Add more tasks for other interfaces as needed
