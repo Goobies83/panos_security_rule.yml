@@ -1,7 +1,7 @@
 ---
 - name: Configure Palo Alto Networks Interface
   hosts: Switch1
-  gather_facts: yes
+  gather_facts: no
   collections:
     - paloaltonetworks.panos
 
