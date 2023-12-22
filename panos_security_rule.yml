@@ -19,8 +19,8 @@
 
   tasks:
   - name: Commit changes
-    panos_commit_all:
+    panos_commit:
       provider: "{{ provider }}"
-    delegate_to: localhost     
+    delegate_to: localhost   
 
     # Add more tasks for other interfaces as needed
