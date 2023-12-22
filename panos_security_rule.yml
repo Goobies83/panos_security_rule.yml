@@ -1,23 +1,16 @@
----
-- name: Create Palo Alto Security Rule
-  hosts: palo_alto_device
-  gather_facts: false
+- name: Configure Palo Alto Networks Interfaces
+  hosts: palo_alto_devices
+  gather_facts: no
+  connection: local
+
   tasks:
-    - name: Create Security Rule
-      panos_security_rule:
-        provider: "{{ palo_alto_provider }}"
-        rule_name: "Allow_TCP_Port_80"
-        description: "Allow incoming TCP traffic on port 80"
-        source_zone: "external"
-        destination_zone: "internal"
-        source_ip: "any"
-        destination_ip: "any"
-        source_user: "any"
-        category: "any"
-        application: "service-http"
-        action: "allow"
-        log_start: true
-        log_end: true
-        log_profile: "default"
-        disabled: false
-      delegate_to: localhost
+    - name: Configure Ethernet1/1 interface
+      panos_interface:
+        provider: "{{ provider }}"
+        name: "ethernet1/1"
+        mode: "layer3"
+        comment: "Configured by Ansible"
+        state: "present"
+        mtu: 1500
+        enable: yes
+        ip_address: "192.168.1.1/24"
