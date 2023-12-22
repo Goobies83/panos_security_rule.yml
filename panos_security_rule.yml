@@ -1,7 +1,7 @@
 ---
 - name: Configure Palo Alto Networks Interface
   hosts: Switch1
-  gather_facts: no
+  gather_facts: yes
   collections:
     - paloaltonetworks.panos
 
@@ -16,5 +16,11 @@
         mtu: 1500
         enable: yes
         ip_address: "192.168.1.1/24"
+
+  tasks:
+    - name: Commit changes
+      panos_commit:
+        provider: "{{ provider }}"
+      delegate_to: localhost     
 
     # Add more tasks for other interfaces as needed
