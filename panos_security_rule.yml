@@ -7,20 +7,14 @@
 
   tasks:
     - name: Configure Ethernet1/1 interface
-      panos_interface:
+      panos_network_interface:
         provider: "{{ provider }}"
         name: "ethernet1/1"
+        zone: "untrust"
         mode: "layer3"
         comment: "Configured by Ansible"
-        state: "present"
-        mtu: 1500
         enable: yes
-        ip_address: "192.168.1.1/24"
-
-  tasks:
-  - name: Commit changes
-    panos_commit:
-      provider: "{{ provider }}"
-    delegate_to: localhost   
-
+        ipv4:
+          address: "192.168.1.1/24"
+        commit: yes
     # Add more tasks for other interfaces as needed
