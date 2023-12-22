@@ -1,7 +1,9 @@
-- name: Configure Palo Alto Networks Interfaces
+---
+- name: Configure Palo Alto Networks Interface
   hosts: palo_alto_devices
-  gather_facts: yes
-  #connection: local
+  gather_facts: no
+  collections:
+    - paloaltonetworks.panos
 
   tasks:
     - name: Configure Ethernet1/1 interface
@@ -14,3 +16,5 @@
         mtu: 1500
         enable: yes
         ip_address: "192.168.1.1/24"
+
+    # Add more tasks for other interfaces as needed
