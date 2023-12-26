@@ -1,24 +1,7 @@
-- name: Get Palo Alto Networks Hostname
+---
+- name: Debug Inventory
   hosts: Switch1
-  gather_facts: no
-  collections:
-    - paloaltonetworks.panos
-
-  vars:
-    provider:
-      username: admin
-      password: Daud@123
-      ip_address: 10.10.10.233
-      port: 443
-      validate_certs: no  # Set to 'yes' if your device has a valid SSL certificate
-    
-
   tasks:
-    - name: Get Palo Alto Networks Hostname
-      paloaltonetworks.panos.panos_facts:
-        provider: "{{ provider }}"
-      register: panos_facts
-
-    - name: Display Hostname
+    - name: List hosts in the palo_alto_devices group
       debug:
-        var: panos_facts.ansible_facts.panos_facts.system.hostname
+        msg: "Host in the palo_alto_devices group"
