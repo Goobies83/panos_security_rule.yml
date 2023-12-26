@@ -14,14 +14,8 @@
       validate_certs: no
       
   tasks:
-    - name: Configure Ethernet1/1 interface
-      paloaltonetworks.panos.panos_network_interface:
+    - name: Change hostname
+      paloaltonetworks.panos.panos_system:
         provider: "{{ provider }}"
-        name: "ethernet1/1"
-        zone: "untrust"
-        mode: "layer3"
-        comment: "Configured by Ansible"
-        enable: yes
-        ipv4:
-          address: "192.168.1.1/24"
+        hostname: "new-hostname"
         commit: yes
