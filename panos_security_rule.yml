@@ -1,6 +1,6 @@
 ---
 - name: Debug Inventory
-  hosts: palo_alto_devices
+  hosts: Switch1
   tasks:
     - name: List hosts in the palo_alto_devices group
       debug:
