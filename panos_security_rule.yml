@@ -15,7 +15,7 @@
       
   tasks:
     - name: Configure Ethernet1/1 interface
-      panos_network_interface:
+      paloaltonetworks.panos.panos_network_interface:
         provider: "{{ provider }}"
         name: "ethernet1/1"
         zone: "untrust"
