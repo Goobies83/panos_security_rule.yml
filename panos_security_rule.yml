@@ -1,12 +1,14 @@
 ---
 - name: Configure PAN-OS
-  hosts: Switch1
+  hosts: palo_alto_devices
   gather_facts: no  # Assuming you don't need facts gathering
 
   tasks:
     - name: Configure Security Rule
-      panos_security_rule:
-        provider: "{{ provider }}"
+      paloaltonetworks.panos.panos_security_rule:
+        ip_address: "{{ provider.ip_address }}"
+        username: "{{ provider.username }}"
+        password: "{{ provider.password }}"
         rule_name: "Allow SSH"
         source_zones: ["trust"]
         destination_zones: ["untrust"]
@@ -16,3 +18,5 @@
         action: "allow"
         description: "Allow SSH traffic"
       delegate_to: localhost
+
+    # Add more tasks as needed for your PAN-OS configuration
