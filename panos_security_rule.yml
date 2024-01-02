@@ -1,7 +1,3 @@
----
-- name: Debug Inventory
-  hosts: Switch1
-  tasks:
-    - name: List hosts in the palo_alto_devices group
-      debug:
-        msg: "Host in the palo_alto_devices group"
+- name: Debug SSH Connection
+  debug:
+    var: ansible_ssh_result
