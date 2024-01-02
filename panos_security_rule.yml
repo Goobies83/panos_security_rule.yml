@@ -1,22 +1,16 @@
 ---
-- name: Configure PAN-OS
+- name: Assign IP Address to Ethernet 1/1
   hosts: palo_alto_devices
-  gather_facts: no  # Assuming you don't need facts gathering
+  gather_facts: no
 
   tasks:
-    - name: Configure Security Rule
-      paloaltonetworks.panos.panos_security_rule:
+    - name: Configure Interface Ethernet 1/1
+      paloaltonetworks.panos.panos_network_interface:
         ip_address: "{{ provider.ip_address }}"
         username: "{{ provider.username }}"
         password: "{{ provider.password }}"
-        rule_name: "Allow SSH"
-        source_zones: ["trust"]
-        destination_zones: ["untrust"]
-        source_addresses: ["any"]
-        destination_addresses: ["any"]
-        applications: ["ssh"]
-        action: "allow"
-        description: "Allow SSH traffic"
+        interface: "ethernet1/1"
+        ipv4:
+          address: "192.168.1.1/24"  # Replace with your desired IP address and subnet mask
+        commit: true
       delegate_to: localhost
-
-    # Add more tasks as needed for your PAN-OS configuration
