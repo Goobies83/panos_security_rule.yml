@@ -1,4 +1,18 @@
 ---
-- name: Debug SSH Connection
-  debug:
-    var: ansible_ssh_result
+- name: Configure PAN-OS
+  hosts: Switch1
+  gather_facts: no  # Assuming you don't need facts gathering
+
+  tasks:
+    - name: Configure Security Rule
+      panos_security_rule:
+        provider: "{{ provider }}"
+        rule_name: "Allow SSH"
+        source_zones: ["trust"]
+        destination_zones: ["untrust"]
+        source_addresses: ["any"]
+        destination_addresses: ["any"]
+        applications: ["ssh"]
+        action: "allow"
+        description: "Allow SSH traffic"
+      delegate_to: localhost
