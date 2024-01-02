@@ -8,9 +8,9 @@
     provider:
       username: admin
       password: Daud@123
-      ip_address: 10.10.10.233
-      port: 22
-      validate_certs: no  
+      #ip_address: 10.10.10.233
+      #port: 22
+      #validate_certs: no  
 
   tasks:
     - name: Get Palo Alto Networks Hostname
