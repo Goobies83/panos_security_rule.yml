@@ -15,7 +15,7 @@
     
 
   tasks:
-    - name: Get Palo Alto Networks Hostname
+    - name: Get Palo Alto Hostname
       paloaltonetworks.panos.panos_facts:
         provider: "{{ provider }}"
       register: panos_facts
