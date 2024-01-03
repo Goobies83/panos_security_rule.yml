@@ -1,7 +1,7 @@
 ---
 - name: Configure PAN-OS
   hosts: Switch1
-  gather_facts: no  # Assuming you don't need facts gathering
+  gather_facts: yes  # Assuming you don't need facts gathering
 
   tasks:
     - name: Configure Security Rule
