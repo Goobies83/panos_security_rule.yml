@@ -10,7 +10,7 @@
       username: admin
       password: Daud@123
       ip_address: 10.10.10.233
-      port: 22
+      port: 23
       validate_certs: no  # Set to 'yes' if your device has a valid SSL certificate
     
 
