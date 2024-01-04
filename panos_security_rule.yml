@@ -14,7 +14,7 @@
 
   tasks:
     - name: Run panos_check module
-      panos_check:
+      paloaltonetworks.panos.panos_check:
         provider: "{{ provider }}"
         check_type: running_config
         check_diff: true
