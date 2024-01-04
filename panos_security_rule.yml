@@ -15,7 +15,7 @@
   tasks:
     - name: Get the system info
       paloaltonetworks.panos.panos_op:
-        provider: '{{ device }}'
+        #provider: '{{ device }}'
         cmd: 'show system info'
       register: res
 
