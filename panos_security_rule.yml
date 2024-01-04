@@ -4,7 +4,7 @@
   gather_facts: no
 
   vars:
-    provider:
+    device:
       username: admin
       password: Daud@123
       ip_address: 10.10.10.233
@@ -15,7 +15,7 @@
   tasks:
     - name: Get the system info
       paloaltonetworks.panos.panos_op:
-        #provider: '{{ device }}'
+        provider: '{{ device }}'
         cmd: 'show system info'
       register: res
 
