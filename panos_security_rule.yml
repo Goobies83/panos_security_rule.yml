@@ -1,18 +1,28 @@
 ---
-- name: Configure PAN-OS
+- name: Check Palo Alto Networks Configuration
   hosts: Switch1
-  gather_facts: yes  # Assuming you don't need facts gathering
+  gather_facts: no
+
+  vars:
+    provider:
+      username: admin
+      password: Daud@123
+      ip_address: 10.10.10.233
+      port: 443
+      validate_certs: no  # Set to 'yes' if your device has a valid SSL certificate
+    
 
   tasks:
-    - name: Configure Security Rule
-      panos_security_rule:
+    - name: Run panos_check module
+      panos_check:
         provider: "{{ provider }}"
-        rule_name: "Allow SSH"
-        source_zones: ["trust"]
-        destination_zones: ["untrust"]
-        source_addresses: ["any"]
-        destination_addresses: ["any"]
-        applications: ["ssh"]
-        action: "allow"
-        description: "Allow SSH traffic"
-      delegate_to: localhost
+        check_type: running_config
+        check_diff: true
+        diff_mode: side_by_side
+        diff_context: 3
+      register: result
+
+    - name: Display Changes
+      debug:
+        var: result.diff_lines
+      when: result.diff_lines is defined
