@@ -1,24 +1,17 @@
 ---
-- name: Check Palo Alto Networks Configuration
+- name: Get Firewall Name
   hosts: Switch1
   gather_facts: no
-
-  vars:
-    device:
-      username: admin
-      password: Daud@123
-      ip_address: 10.10.10.233
-      port: 22
-      validate_certs: no  # Set to 'yes' if your device has a valid SSL certificate
-    
-
   tasks:
-    - name: Get the system info
-      paloaltonetworks.panos.panos_op:
-        provider: '{{ device }}'
-        cmd: 'show system info'
-      register: res
+    - name: Gather system information
+      panos_op:
+        provider:
+          hostname: "{{ paloalto_host }}"
+          username: "{{ paloalto_user }}"
+          password: "{{ paloalto_password }}"
+        cmd: "<show><system><info></info></system></show>"
+      register: system_info
 
-    - name: Show the system info
-      ansible.builtin.debug:
-        msg: '{{ res.stdout }}'
+    - name: Display Firewall Name
+      debug:
+        var: system_info['stdout']['result']['system']['hostname']
