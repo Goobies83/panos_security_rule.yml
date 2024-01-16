@@ -1,6 +1,6 @@
 ---
 - name: Get Firewall Name
-  hosts: Switch1
+  hosts: paloalto
   gather_facts: no
   tasks:
     - name: Gather system information
