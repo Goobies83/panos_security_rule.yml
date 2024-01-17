@@ -1,8 +1,11 @@
 # playbook.yml
 ---
 - name: Configure Firewall
-  hosts: FW
+  hosts: firewall_device
   gather_facts: no
+
+  vars_files:
+    - vars.yml
 
   tasks:
     - name: Display Firewall Configuration
