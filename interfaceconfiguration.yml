@@ -9,16 +9,18 @@
     - paloaltonetworks.panos
 
 
-  #vars_files:
-    #- vars.yml
-    palo_provider:
-      ip_address: '10.10.10.233'
-      api_key: LUFRPT1rNlA3bGhBWkRjeFhQZXpNNmVtY1JWLzhHTWc9YzFFRjZsQXhlaEJkN3B6aEdqelZ3YnBsTHFJVjdsMlNXOW9SY1VvYkVrNkdlNmRSQjdQL0tKUStQVFk2amNHbQ==
+  vars_files:
+    - vars.yml
+    #palo_provider:
+      #ip_address: '10.10.10.233'
+      #api_key: LUFRPT1rNlA3bGhBWkRjeFhQZXpNNmVtY1JWLzhHTWc9YzFFRjZsQXhlaEJkN3B6aEdqelZ3YnBsTHFJVjdsMlNXOW9SY1VvYkVrNkdlNmRSQjdQL0tKUStQVFk2amNHbQ==
 
   tasks:
     - name: Create Server Object
+      include_vars:
+        file: vars.yml
       panos_address_object:
-        provider: '{{ palo_provider }}'
+        #provider: '{{ palo_provider }}'
         name: 'server1'
         value: '172.16.1.10'
         description: 'vmware'
