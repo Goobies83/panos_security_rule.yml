@@ -1,12 +1,11 @@
 ---
-
 - name: Palo Alto Playbook
   hosts: FW
   gather_facts: false
   #connection: local
 
-  #collections:
-    #- paloaltonetworks.panos
+  collections:
+    - paloaltonetworks.panos
 
 
   vars_files:
