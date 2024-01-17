@@ -12,4 +12,3 @@
           Admin User: {{ firewall.admin_user }}
           Admin Password: {{ firewall.admin_password }}
           Management IP: {{ firewall.management_ip }}
-
