@@ -2,7 +2,7 @@
 ---
 - name: Configure Firewall
   #hosts: firewall_device
-  hosts: PAN-OS-Inventory
+  #hosts: PAN-OS-Inventory
   gather_facts: no
 
   vars_files:
