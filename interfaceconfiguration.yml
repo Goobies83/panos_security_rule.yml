@@ -11,14 +11,14 @@
     - ansible.utils
 
   tasks:
-    - name: "Run commmand 'show interfaces' on firewalls running PAN-OS."
-      paloaltonetworks.panos.panos_op:
-        provider:
-          ip_address: "{{ 10.10.10.233 }}"
-          username: "{{ admin }}"
-          password: "{{ Daud@123 }}"
-        cmd: "show interface all"
-      register: result
+  - name: "Run command 'show interfaces' on firewalls running PAN-OS."
+    shell: "your_command_here"
+    args:
+      executable: /bin/bash
+    register: show_interfaces_output
+
+  - debug:
+      var: show_interfaces_output.stdout_lines
 
     - name: "Convert to Python dictionary with xmltodict"
       set_fact:
