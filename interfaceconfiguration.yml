@@ -16,7 +16,7 @@
 
   tasks:
     - name: Create Server Object
-      paloaltonetworks.panos.panos_address_object:
+      panos_address_object:
         provider: '{{ palo_provider }}'
         name: 'server1'
         value: '172.16.1.10'
