@@ -15,8 +15,8 @@
       paloaltonetworks.panos.panos_op:
         provider:
           ip_address: "{{ 10.10.10.233 }}"
-          username: "{{ Gobi }}"
-          password: "{{ ITCE_1234 }}"
+          username: "{{ admin }}"
+          password: "{{ Daud@123 }}"
         cmd: "show interface all"
       register: result
 
