@@ -1,29 +1,21 @@
 ---
-#------------------------------------------------------------------------
-# HELLO WORLD
-#------------------------------------------------------------------------
-- hosts: FW
+- name: Change Palo Alto firewall hostname
+  hosts: paloalto
   connection: local
-  gather_facts: False
-  become: False
-  collections:
-    - paloaltonetworks.panos
-    - ansible.utils
+  gather_facts: no
 
   tasks:
-    - name: "Run commmand 'show interfaces' on firewalls running PAN-OS."
-      paloaltonetworks.panos.panos_op:
-        provider:
-          ip_address: "{{ 10.10.10.233 }}"
-          username: "{{ Gobi }}"
-          password: "{{ ITCE_1234 }}"
-        cmd: "show interface all"
-      register: result
+    - name: Set new hostname
+      panos_device:
+        ip_address: "{{ ansible_host }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        operation: set
+        xpath: /config/devices/entry[@name='localhost.localdomain']/deviceconfig/system/hostname
+        element: "{{ new_hostname }}"
 
-    - name: "Convert to Python dictionary with xmltodict"
-      set_fact:
-        interfaces: "{{ result['stdout_xml'] | ansible.utils.from_xml('xmltodict') }}"
-
-    - name: "Print interface output to the console"
-      debug:
-        msg: "{{ interfaces['response']['result']['hw']['entry'] }}"
+    - name: Commit changes
+      panos_commit:
+        ip_address: "{{ 10.10.10.233 }}"
+        username: "{{ admin }}"
+        password: "{{ Daud@123 }}"
