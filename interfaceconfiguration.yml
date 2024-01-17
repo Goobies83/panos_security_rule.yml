@@ -9,7 +9,7 @@
     #- paloaltonetworks.panos
 
 
-  vars:
+  vars_files:
     - vars.yml
     #palo_provider:
       #ip_address: '10.10.10.233'
