@@ -1,7 +1,7 @@
 # playbook.yml
 ---
 - name: Configure Firewall
-  hosts: firewall_device
+  hosts: PA-Firewall
   gather_facts: no
 
   vars_files:
