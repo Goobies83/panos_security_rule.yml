@@ -1,86 +1,29 @@
 ---
-- name: Palo Alto Playbook
-  hosts: FW
-  gather_facts: false
+#------------------------------------------------------------------------
+# CHECK TO SEE IF PANORAMA WOULD ALLOW ME TO CREATE A SECURITY OBJECT
+#------------------------------------------------------------------------
+- hosts: FW
   connection: local
-  become: yes
-  
+  gather_facts: False
+  become: False
   collections:
     - paloaltonetworks.panos
-
-
-  vars_files:
-    - vars.yml
-    #palo_provider:
-      #ip_address: '10.10.10.233'
-      #api_key: LUFRPT1rNlA3bGhBWkRjeFhQZXpNNmVtY1JWLzhHTWc9YzFFRjZsQXhlaEJkN3B6aEdqelZ3YnBsTHFJVjdsMlNXOW9SY1VvYkVrNkdlNmRSQjdQL0tKUStQVFk2amNHbQ==
+    - ansible.utils
 
   tasks:
-    - name: Create Server Object
-      include_vars:
-        file: vars.yml
+    - name: "Validate that Panorama would allow us to create an object, check mode"
       panos_address_object:
-        #provider: '{{ palo_provider }}'
-        name: 'server1'
-        value: '172.16.1.10'
-        description: 'vmware'
+        provider:
+          ip_address: "{{ 10.10.10.233 }}"
+          username: "{{ Gobi }}"
+          api_key: "{{ LUFRPT1rNlA3bGhBWkRjeFhQZXpNNmVtY1JWLzhHTWc9YzFFRjZsQXhlaEJkN3B6aEdqelZ3YnBsTHFJVjdsMlNXOW9SY1VvYkVrNkdlNmRSQjdQL0tKUStQVFk2amNHbQ== }}"
+        name: "Gaming-PC"
+        address_type: "fqdn"
+        value: "gaming.redtail.com"
+        description: "Gaming PC"
+      check_mode: yes
+      register: result
 
-    - name: Create Users Object
-      panos_address_object:
-        provider: '{{ palo_provider }}'
-        name: 'users-subnet'
-        value: '10.10.10.0/24'
-        description: 'users subnet'
-
-    - name: Management Profile
-      panos_management_profile:
-        provider: '{{ palo_provider }}'
-        name: 'Allow Ping'
-        ping: true
-
-    - name: Create INSIDE Zone
-      panos_zone:
-        provider: '{{ palo_provider}}'
-        zone: 'INSIDE'
-        mode: 'layer3' 
-    
-    - name: Create USERS Zone
-      panos_zone:
-        provider: '{{ palo_provider}}'
-        zone: 'USERS'
-        mode: 'layer3'
-
-    - name: ethernet1/1 config
-      panos_interface:
-        provider: '{{ palo_provider }}'
-        if_name: 'ethernet1/1'
-        zone_name: 'INSIDE'
-        management_profile: 'Allow Ping'
-        mode: 'layer3'
-        enable_dhcp: false
-        ip: ['172.16.1.1/24']
-
-    - name: ethernet1/2 config
-      panos_interface:
-        provider: '{{ palo_provider }}'
-        if_name: 'ethernet1/2'
-        zone_name: 'USERS'
-        mode: 'layer3'
-        enable_dhcp: false
-        ip: ['10.10.10.1/24']
-
-    - name: Allow ping from users to server1
-      panos_security_rule:
-        provider: '{{ palo_provider }}'
-        rule_name: 'allow ping'
-        description: 'Allow ping from users to server1'
-        source_zone: ['USERS']
-        source_ip: ['users-subnet']
-        destination_zone: ['INSIDE']
-        destination_ip: ['server1'] 
-        application: ['ping']
-        action: 'allow'
-
-    - name: Commit
-      panos_commit:
-        provider: '{{ palo_provider }}'
+    - name: "Print result to the console"
+      debug:
+        msg: "{{ result }}"
