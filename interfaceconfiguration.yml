@@ -1,6 +1,6 @@
 ---
 #------------------------------------------------------------------------
-# CHECK TO SEE IF PANORAMA WOULD ALLOW ME TO CREATE A SECURITY OBJECT
+# HELLO WORLD
 #------------------------------------------------------------------------
 - hosts: FW
   connection: local
@@ -11,19 +11,19 @@
     - ansible.utils
 
   tasks:
-    - name: "Validate that Panorama would allow us to create an object, check mode"
-      panos_address_object:
+    - name: "Run commmand 'show interfaces' on firewalls running PAN-OS."
+      paloaltonetworks.panos.panos_op:
         provider:
           ip_address: "{{ 10.10.10.233 }}"
           username: "{{ Gobi }}"
-          api_key: "{{ LUFRPT1rNlA3bGhBWkRjeFhQZXpNNmVtY1JWLzhHTWc9YzFFRjZsQXhlaEJkN3B6aEdqelZ3YnBsTHFJVjdsMlNXOW9SY1VvYkVrNkdlNmRSQjdQL0tKUStQVFk2amNHbQ== }}"
-        name: "Gaming-PC"
-        address_type: "fqdn"
-        value: "gaming.redtail.com"
-        description: "Gaming PC"
-      check_mode: yes
+          password: "{{ ITCE_1234 }}"
+        cmd: "show interface all"
       register: result
 
-    - name: "Print result to the console"
+    - name: "Convert to Python dictionary with xmltodict"
+      set_fact:
+        interfaces: "{{ result['stdout_xml'] | ansible.utils.from_xml('xmltodict') }}"
+
+    - name: "Print interface output to the console"
       debug:
-        msg: "{{ result }}"
+        msg: "{{ interfaces['response']['result']['hw']['entry'] }}"
