@@ -3,7 +3,8 @@
   hosts: FW
   gather_facts: false
   #connection: local
-
+  become: yes
+  
   collections:
     - paloaltonetworks.panos
 
