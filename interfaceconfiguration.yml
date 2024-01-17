@@ -9,11 +9,11 @@
     - paloaltonetworks.panos
 
 
-  vars_files:
-    - vars.yml
-    #palo_provider:
-      #ip_address: '10.10.10.233'
-      #api_key: LUFRPT1rNlA3bGhBWkRjeFhQZXpNNmVtY1JWLzhHTWc9YzFFRjZsQXhlaEJkN3B6aEdqelZ3YnBsTHFJVjdsMlNXOW9SY1VvYkVrNkdlNmRSQjdQL0tKUStQVFk2amNHbQ==
+  vars:
+    #- vars.yml
+    palo_provider:
+      ip_address: '10.10.10.233'
+      api_key: LUFRPT1rNlA3bGhBWkRjeFhQZXpNNmVtY1JWLzhHTWc9YzFFRjZsQXhlaEJkN3B6aEdqelZ3YnBsTHFJVjdsMlNXOW9SY1VvYkVrNkdlNmRSQjdQL0tKUStQVFk2amNHbQ==
 
   tasks:
     - name: Create Server Object
