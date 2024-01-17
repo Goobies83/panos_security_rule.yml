@@ -1,7 +1,7 @@
 # playbook.yml
 ---
 - name: Configure Firewall
-  hosts: PA-Firewall
+  hosts: FW
   gather_facts: no
 
   tasks:
