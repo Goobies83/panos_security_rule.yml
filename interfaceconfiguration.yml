@@ -3,16 +3,17 @@
 - name: Palo Alto Playbook
   hosts: FW
   gather_facts: false
-  connection: local
+  #connection: local
 
-  collections:
-    - paloaltonetworks.panos
+  #collections:
+    #- paloaltonetworks.panos
 
 
   vars:
-    palo_provider:
-      ip_address: '10.10.10.233'
-      api_key: LUFRPT1rNlA3bGhBWkRjeFhQZXpNNmVtY1JWLzhHTWc9YzFFRjZsQXhlaEJkN3B6aEdqelZ3YnBsTHFJVjdsMlNXOW9SY1VvYkVrNkdlNmRSQjdQL0tKUStQVFk2amNHbQ==
+    vars.yml
+    #palo_provider:
+      #ip_address: '10.10.10.233'
+      #api_key: LUFRPT1rNlA3bGhBWkRjeFhQZXpNNmVtY1JWLzhHTWc9YzFFRjZsQXhlaEJkN3B6aEdqelZ3YnBsTHFJVjdsMlNXOW9SY1VvYkVrNkdlNmRSQjdQL0tKUStQVFk2amNHbQ==
 
   tasks:
     - name: Create Server Object
