@@ -1,0 +1,5 @@
+firewall:
+  hostname: "PA-VM"
+  admin_user: "Gobi"
+  admin_password: "ITCE_1234"
+  management_ip: "10.10.10.233"
