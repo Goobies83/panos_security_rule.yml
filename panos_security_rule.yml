@@ -1,17 +1,18 @@
+# playbook.yml
 ---
-- name: Get Firewall Name
-  hosts: paloalto
+- name: Configure Firewall
+  hosts: firewall_device
   gather_facts: no
-  tasks:
-    - name: Gather system information
-      panos_op:
-        provider:
-          hostname: "{{ paloalto_host }}"
-          username: "{{ paloalto_user }}"
-          password: "{{ paloalto_password }}"
-        cmd: "<show><system><info></info></system></show>"
-      register: system_info
 
-    - name: Display Firewall Name
+  vars_files:
+    - vars.yml
+
+  tasks:
+    - name: Display Firewall Configuration
       debug:
-        var: system_info['stdout']['result']['system']['hostname']
+        msg: |
+          Hostname: {{ firewall.hostname }}
+          Admin User: {{ firewall.admin_user }}
+          Admin Password: {{ firewall.admin_password }}
+          Management IP: {{ firewall.management_ip }}
+
