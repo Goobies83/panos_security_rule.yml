@@ -1,29 +1,19 @@
 ---
-#------------------------------------------------------------------------
-# HELLO WORLD
-#------------------------------------------------------------------------
-- hosts: FW
+- hosts: firewalls
   connection: local
-  gather_facts: False
-  become: False
+  gather_facts: false
+  become: false
   collections:
     - paloaltonetworks.panos
     - ansible.utils
-
   tasks:
-  - name: "Run command 'show interfaces' on firewalls running PAN-OS."
-    shell: "your_command_here"
-    args:
-      executable: /bin/bash
-    register: show_interfaces_output
-
-  - debug:
-      var: show_interfaces_output.stdout_lines
-
-    - name: "Convert to Python dictionary with xmltodict"
+    - name: Run commmand 'show interfaces' on firewalls running PAN-OS.
+      paloaltonetworks.panos.panos_op:
+        cmd: show interface all
+      register: result
+    - name: Convert to Python dictionary with xmltodict
       set_fact:
         interfaces: "{{ result['stdout_xml'] | ansible.utils.from_xml('xmltodict') }}"
-
-    - name: "Print interface output to the console"
+    - name: Print interface output to the console
       debug:
         msg: "{{ interfaces['response']['result']['hw']['entry'] }}"
